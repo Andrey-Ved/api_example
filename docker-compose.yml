@@ -1,0 +1,48 @@
+version: "3.8"
+services:
+  notes_api:
+    image: notes_api
+    build:
+      context: .
+    container_name: notes_api
+    volumes:
+      - ./app/sqlite_example.db:/notes_api/app/sqlite_example.db
+    env_file:
+      - .env
+    restart: unless-stopped
+    ports:
+      - "${API_PORT}:${API_PORT}"
+    networks:
+      - custom
+
+  prometheus:
+    image: prom/prometheus:v2.43.0
+    container_name: prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    restart: unless-stopped
+    ports:
+      - 9090:9090
+    networks:
+      - custom
+
+  grafana:
+    image: grafana/grafana:9.4.7
+    container_name: grafana
+    volumes:
+      - grafana-data:/var/lib/grafana
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+
+networks:
+  custom:
+    driver: bridge
+
+volumes:
+  notes_app:
+  prometheus-data:
+  grafana-data:
