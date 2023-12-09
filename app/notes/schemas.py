@@ -12,4 +12,10 @@ class Note(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
 
+class NotesList(BaseModel):
+    data: Union[list[Note], None]
+
+    model_config = ConfigDict(from_attributes=True)
+
+
 logger.info(msg='init notes schemas')

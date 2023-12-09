@@ -3,7 +3,7 @@ from fastapi_versioning import version
 from typing import Annotated
 
 from app.core.logger import logger
-from app.notes.schemas import Note
+from app.notes.schemas import Note, NotesList
 from app.notes.services import get_all_user_notes, add_new_note
 from app.users.schemas import User
 from app.users.services import get_current_active_user
@@ -29,8 +29,10 @@ async def post_note(
 @version(2)
 async def get_all_my_notes(
         current_user: Annotated[User, Depends(get_current_active_user)],
-) -> list[Note]:
-    return await get_all_user_notes(current_user)
+) -> NotesList:
+    return NotesList(
+        data = await get_all_user_notes(current_user)
+    )
 
 
 logger.info(msg='init notes routers')

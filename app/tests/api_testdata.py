@@ -195,16 +195,18 @@ testdata = [
             },
         },
         'response_status_code': 200,
-        'response_json': [
-            {
-                'create_at': '2023-11-30T11:07:12.102928',
-                'text': 'Test note # 2'
-            },
-            {
-                'create_at': '2023-11-30T11:07:13.102928',
-                'text': 'Test note # 3'
-            }
-        ],
+        'response_json': {
+            'data': [
+                {
+                    'create_at': '2023-11-30T11:07:12.102928',
+                    'text': 'Test note # 2'
+                },
+                {
+                    'create_at': '2023-11-30T11:07:13.102928',
+                    'text': 'Test note # 3'
+                }
+            ]
+        },
         'save_token': False,
     },
     {
