@@ -31,7 +31,7 @@ async def get_all_my_notes(
         current_user: Annotated[User, Depends(get_current_active_user)],
 ) -> NotesList:
     return NotesList(
-        data = await get_all_user_notes(current_user)
+        data=await get_all_user_notes(current_user)
     )
 
 

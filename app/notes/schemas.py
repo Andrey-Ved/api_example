@@ -13,7 +13,7 @@ class Note(BaseModel):
 
 
 class NotesList(BaseModel):
-    data: Union[list[Note], None]
+    data: Union[list[Note], Note, None]
 
     model_config = ConfigDict(from_attributes=True)
 
